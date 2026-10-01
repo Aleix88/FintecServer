@@ -1,13 +1,19 @@
 package org.fintec
 
-import org.fintec.data.repositories.AccountRepository
-import org.fintec.domain.command.CreateAccount
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
-fun main() {
-    val useCase = CreateAccount(AccountRepository())
-    try {
-        useCase.run(CreateAccount.Parameters(userId = "", name = "", currency = "", initialBalance = 0.0))
-    } catch (e: IllegalArgumentException) {
-        println(e)
-    }
+@RestController
+@SpringBootApplication
+class MyApplication {
+
+    @RequestMapping("/")
+    fun home() = "Hello World!"
+
+}
+
+fun main(args: Array<String>) {
+    runApplication<MyApplication>(*args)
 }
